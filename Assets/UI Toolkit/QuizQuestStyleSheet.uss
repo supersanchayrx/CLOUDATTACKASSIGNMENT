@@ -1,0 +1,10 @@
+.header {
+    font-size: 40px;
+}
+
+.button {
+    font-size: 20px;
+    width: 240px;
+    height: 100px;
+    align-self: center;
+}

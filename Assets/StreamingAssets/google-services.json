@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "218722658169",
+    "firebase_url": "https://testgame1-c6436-default-rtdb.firebaseio.com",
+    "project_id": "testgame1-c6436",
+    "storage_bucket": "testgame1-c6436.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:218722658169:android:aac7d55fc0c48c638db1a8",
+        "android_client_info": {
+          "package_name": "com.cloudattack.company"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_tzeNUCX9W8TnvhI5MvL7nYaI-8A35W8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

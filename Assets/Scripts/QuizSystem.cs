@@ -72,6 +72,7 @@ public class QuizSystem : MonoBehaviour
         //if(rightTime)
         StartCoroutine(QuizDataFetcher(url));
         TimeLeft = 20f;
+        maxTime = 20f;
     }
 
     

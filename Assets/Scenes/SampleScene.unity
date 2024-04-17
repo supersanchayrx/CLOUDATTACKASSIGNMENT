@@ -187,7 +187,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentQuestionIndex: 0
   pointsToAdd: 0
-  rightTime: 0
+  maxTime: 20
 --- !u!1 &71117132
 GameObject:
   m_ObjectHideFlags: 0

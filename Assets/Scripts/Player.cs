@@ -10,13 +10,13 @@ public class Player : MonoBehaviour
     public Animator anim;
     public bool updateStreak,destroyStreak;
     public int Streak;
-    public int points;
-    public string username, useremail;
+    public static int points;
+    public static string username, useremail;
     UIDocument quizDoc, userdata;
-    TextField playerName, playermail;
-    Button saveButton, loadButton;
+    public TextField playerName, playermail;
+    Button saveButton, loadButton, quitButton;
     FireBaseData firebase;
-    Label playerPoints;
+    public Label playerPoints;
     Camera cam;
     public bool camUp, canRotate, movecamera;
     Quaternion startAngle, targetAngle;
@@ -24,6 +24,7 @@ public class Player : MonoBehaviour
     QuizSystem quizScript;
     bool onceDone;
     GameObject quizSYSTEM;
+    public int pointsToSHow;
 
     private void Awake()
     {
@@ -32,7 +33,8 @@ public class Player : MonoBehaviour
         playerName = userdata.rootVisualElement.Q("username") as TextField;
         playermail = userdata.rootVisualElement.Q("usermail") as TextField;
         saveButton = userdata.rootVisualElement.Q("saveButton") as Button;
-        //loadButton = userdata.rootVisualElement.Q("loadButton") as Button;
+        quitButton = userdata.rootVisualElement.Q("quit") as Button;
+        loadButton = userdata.rootVisualElement.Q("loadButton") as Button;
         playerPoints = userdata.rootVisualElement.Q("points") as Label;
         firebase = GameObject.Find("DataBaseManager").GetComponent<FireBaseData>();
         cam = GameObject.Find("Main Camera").GetComponent<Camera>();
@@ -56,16 +58,19 @@ public class Player : MonoBehaviour
         targetAngle = Quaternion.Euler(0f, 0f, 0f);
         onceDone = false;
         //quizSYSTEM.SetActive(false);
+        loadButton.visible = false;
 
     }
 
     // Update is called once per frame
     void Update()
     {
+        pointsToSHow = points;
         {
             saveButton.RegisterCallback<ClickEvent>((saveevt) => onSubmit());
-            //loadButton.RegisterCallback<ClickEvent>((loadevt) => onLoad());
-            playerPoints.text = points.ToString();
+            loadButton.RegisterCallback<ClickEvent>((loadevt) => onLoad());
+            quitButton.RegisterCallback<ClickEvent>((quitevt) => onQuit());
+            //playerPoints.text = points.ToString();
         }
 
         if(updateStreak)
@@ -90,6 +95,8 @@ public class Player : MonoBehaviour
         points += quizScript.pointsToAdd;
         Streak++;
         updateStreak = false;
+        //firebase.OnPostData();
+
     }
 
     void DestroyStreak()
@@ -97,6 +104,8 @@ public class Player : MonoBehaviour
         points += 0;
         Streak = 0;
         destroyStreak = false;
+        //firebase.OnPostData();
+
     }
 
     public void onSubmit()
@@ -141,12 +150,15 @@ public class Player : MonoBehaviour
     {
         userdata.rootVisualElement.Q<VisualElement>("container").style.visibility = Visibility.Hidden;
         movecamera = true;
+        loadButton.visible = false;
+
         //unhideUIquiz();
     }
     public void unhideUIuser()
     {
         userdata.rootVisualElement.Q<VisualElement>("container").style.visibility = Visibility.Visible;
         movecamera = true;
+        loadButton.visible = true;
 
         //hideUIquiz();
     }
@@ -229,6 +241,11 @@ public class Player : MonoBehaviour
         onceDone = true;
         playerName.value = username;
         playermail.value = useremail;
-        playerPoints.text = points.ToString();
+        playerPoints.text = pointsToSHow.ToString();      
+    }
+
+    void onQuit()
+    {
+        Application.Quit();
     }
 }

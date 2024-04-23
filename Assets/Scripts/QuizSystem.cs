@@ -169,6 +169,7 @@ public class QuizSystem : MonoBehaviour
         else
         {
             Debug.Log("QuizEnded");
+            //playerScript.onSubmit();
         }
 
     }
@@ -211,6 +212,7 @@ public class QuizSystem : MonoBehaviour
 
     void OnClick()
     {
+        //fireScript.OnPostData();
         Debug.Log("Incorrect Answer Clicked");
         playerScript.destroyStreak = true;
         StartCoroutine(WaitAndFetchQuiz());
@@ -224,6 +226,7 @@ public class QuizSystem : MonoBehaviour
 
     void OnClickCorrect()
     {
+        //fireScript.OnPostData();
         float timeTaken = Time.time - startTime;
 
         if (timeTaken <= 5f)

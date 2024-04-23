@@ -14,7 +14,7 @@ public class USER
 
     public USER()
     {
-        GameObject playerObject = GameObject.Find("player");
+        /*GameObject playerObject = GameObject.Find("player");
 
         // Check if the GameObject with the script is found
         if (playerObject != null)
@@ -31,5 +31,13 @@ public class USER
             }
 
         }
+        else
+        {
+            Debug.Log("cannotFindPlayer");
+        }*/
+
+        user_name = Player.username;
+        user_email = Player.useremail;
+        points = Player.points;
     }
 }

@@ -38,25 +38,31 @@ public class FireBaseData : MonoBehaviour
 
     void getScore()
     {
-        player.points = user.points;
-        player.username = user.user_name;
-        player.useremail = user.user_email;
+        Player.points = user.points;
+        Player.username = user.user_name;
+        Player.useremail = user.user_email;
         player.showRESULTS();
+
     }
 
     public void OnPostData()
-    { 
+    {
+        /*user.user_name = player.username;
+        user.user_email = player.useremail;*/
         USER user = new USER();
-        RestClient.Post(databaseURL + player.username+".json", user);
-        Debug.Log("user Email : "+ user.user_email + "username :  " + user.user_name);
+        RestClient.Put(databaseURL + Player.username + ".json", user);
+        Debug.Log("user Email : "+ Player.useremail + "username :  " + Player.username);
     }
 
     public void LoadData()
     {
-        RestClient.Get<USER>(databaseURL + player.username + ".json").Then(onResolved: response =>
+        RestClient.Get<USER>(databaseURL +  player.playerName.text + ".json").Then(onResolved: response =>
         {
             user = response;
+            //return response;
             getScore();
         });
+
+        //return null;
     }
 }
